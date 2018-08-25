@@ -1,0 +1,40 @@
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getLogger((java.lang.String) "");
+final java141.util.logging.Logger var1 = java141.util.logging.Logger.getLogger((java.lang.String) "");
+final java.util.logging.Level var2 = java.util.logging.Level.FINE;
+var0.logp((java.util.logging.Level) var2, (java.lang.String) "", (java.lang.String) "3o", (java.lang.String) "<", (java.lang.Object) var1);
+final java.util.logging.LogRecord var3 = new java.util.logging.LogRecord((java.util.logging.Level) var2, (java.lang.String) "#");
+var0.log((java.util.logging.LogRecord) var3);
+final bug4779253.MyFilter var4 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var4);
+var0.exiting((java.lang.String) "i", (java.lang.String) "", (java.lang.Object) var2);
+
+Concurrent suffixes:
+
+var0.info((java.lang.String) "");
+
+vs.
+
+var0.setFilter((java.util.logging.Filter) null);
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test8_1$1.run(Test8_1.java:37)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:330)
+	at java141.util.logging.LogManager$RootLogger.log(LogManager.java:820)
+	at java141.util.logging.Logger.doLog(Logger.java:367)
+	at java141.util.logging.Logger.log(Logger.java:390)
+	at java141.util.logging.Logger.info(Logger.java:903)
+	at Test8_1$1.run(Test8_1.java:28)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,155754,195,7,188,0,0,360,961,48667,3697,100287,2142

@@ -1,0 +1,44 @@
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getAnonymousLogger();
+final java.lang.String var1 = var0.getName();
+final bug4779253.MyFilter var2 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var2);
+final boolean var3 = var0.getUseParentHandlers();
+final java.util.logging.Level var4 = java.util.logging.Level.INFO;
+var0.logp((java.util.logging.Level) var4, (java.lang.String) "", (java.lang.String) var1, (java.lang.String) "");
+final java.util.ResourceBundle var5 = var0.getResourceBundle();
+var0.info((java.lang.String) "");
+final java.util.logging.Filter var6 = var0.getFilter();
+
+Concurrent suffixes:
+
+var0.setFilter((java.util.logging.Filter) null);
+
+vs.
+
+var0.severe((java.lang.String) "");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test7_1$2.run(Test7_1.java:59)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:330)
+	at java141.util.logging.Logger.doLog(Logger.java:367)
+	at java141.util.logging.Logger.log(Logger.java:390)
+	at java141.util.logging.Logger.severe(Logger.java:873)
+	at Test7_1$2.run(Test7_1.java:49)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,287684,284,8,276,0,0,360,999,130498,13789,135476,6922

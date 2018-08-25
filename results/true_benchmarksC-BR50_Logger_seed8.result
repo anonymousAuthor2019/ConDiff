@@ -1,0 +1,40 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getAnonymousLogger();
+final java.util.logging.Level var1 = java.util.logging.Level.ALL;
+final java.lang.String var2 = var1.getResourceBundleName();
+var0.entering((java.lang.String) "e,ie", (java.lang.String) "", (java.lang.Object) var2);
+var0.finest((java.lang.String) "");
+final java.util.logging.Level var3 = java.util.logging.Level.ALL;
+var0.log((java.util.logging.Level) var3, (java.lang.String) "LJ", (java.lang.Object) var2);
+final java.util.logging.Level var4 = java.util.logging.Level.OFF;
+final java.util.logging.LogRecord var5 = new java.util.logging.LogRecord((java.util.logging.Level) var1, (java.lang.String) var2);
+final java.lang.Throwable var6 = var5.getThrown();
+var0.logp((java.util.logging.Level) var4, (java.lang.String) var2, (java.lang.String) ".[0", (java.lang.String) "", (java.lang.Throwable) var6);
+var0.severe((java.lang.String) "");
+var0.setLevel((java.util.logging.Level) var1);
+var0.exiting((java.lang.String) "", (java.lang.String) var2, (java.lang.Object) var4);
+var0.log((java.util.logging.Level) var3, (java.lang.String) var2, (java.lang.Throwable) var6);
+final bug4779253.MyFilter var7 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var7);
+
+Concurrent suffixes:
+
+var0.setFilter((java.util.logging.Filter) null);
+
+vs.
+
+var0.severe((java.lang.String) "");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test8_1$2.run(Test8_1.java:66)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:314)
+	at java141.util.logging.Logger.doLog(Logger.java:351)
+	at java141.util.logging.Logger.log(Logger.java:374)
+	at java141.util.logging.Logger.severe(Logger.java:873)
+	at Test8_1$2.run(Test8_1.java:56)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,1955429,314,8,306,0,0,584,1046,1793941,17308,130463,12671

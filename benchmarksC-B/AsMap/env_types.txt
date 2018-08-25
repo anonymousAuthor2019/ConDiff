@@ -1,0 +1,3 @@
+com.google.common.collect.AsMap
+com.google.common.collect.AbstractMultimap
+java.util.AbstractMap

@@ -1,0 +1,29 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var2 = var1.getLayout();
+final org.apache.log4j.ConsoleAppender var3 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var2);
+final org.apache.log4j.Layout var4 = var3.getLayout();
+final org.apache.log4j.ConsoleAppender var5 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var4);
+var0.addAppender((org.apache.log4j.Appender) var5);
+var0.removeAppender((org.apache.log4j.Appender) var5);
+final int var6 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+
+Concurrent suffixes:
+
+final int var7 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test2_1$1.run(Test2_1.java:39)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.appendLoopOnAppenders(AppenderAttachableImpl.java:61)
+	at Test2_1$1.run(Test2_1.java:28)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,5110,34,1,33,0,0,26,504,1043,317,3141,105

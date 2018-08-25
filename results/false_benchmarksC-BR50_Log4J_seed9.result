@@ -1,0 +1,29 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var2 = var1.getLayout();
+final org.apache.log4j.ConsoleAppender var3 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var2, (java.lang.String) "$");
+final org.apache.log4j.Layout var4 = var3.getLayout();
+final org.apache.log4j.ConsoleAppender var5 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var4);
+var0.addAppender((org.apache.log4j.Appender) var5);
+final org.apache.log4j.Appender var6 = var0.getAppender((java.lang.String) "");
+final org.apache.log4j.Appender var7 = var0.getAppender((java.lang.String) "");
+
+Concurrent suffixes:
+
+var0.removeAllAppenders();
+
+vs.
+
+var0.removeAppender((java.lang.String) "");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test9_1$2.run(Test9_1.java:58)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.removeAppender(AppenderAttachableImpl.java:165)
+	at Test9_1$2.run(Test9_1.java:48)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,142089,74,74,0,0,0,26,486,4256,2467,134880,0

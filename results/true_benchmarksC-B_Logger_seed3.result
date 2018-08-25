@@ -1,0 +1,67 @@
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getAnonymousLogger();
+var0.config((java.lang.String) "");
+final java.util.logging.Level var1 = java.util.logging.Level.ALL;
+final java.util.logging.LogRecord var2 = new java.util.logging.LogRecord((java.util.logging.Level) var1, (java.lang.String) "B");
+final java.lang.Throwable var3 = var2.getThrown();
+var0.throwing((java.lang.String) "1", (java.lang.String) "l", (java.lang.Throwable) var3);
+var0.finer((java.lang.String) "");
+final java141.util.logging.Logger var4 = java141.util.logging.Logger.getLogger((java.lang.String) "U");
+final bug4779253.MyFilter var5 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var5);
+final java.lang.Object[] var6 = var2.getParameters();
+var0.logrb((java.util.logging.Level) var1, (java.lang.String) "(@ ", (java.lang.String) "", (java.lang.String) "", (java.lang.String) "QI", (java.lang.Object[]) var6);
+
+Concurrent suffixes:
+
+var0.setFilter((java.util.logging.Filter) null);
+
+vs.
+
+var0.severe((java.lang.String) "");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test3_1$2.run(Test3_1.java:61)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:321)
+	at java141.util.logging.Logger.doLog(Logger.java:358)
+	at java141.util.logging.Logger.log(Logger.java:380)
+	at java141.util.logging.Logger.severe(Logger.java:862)
+	at Test3_1$2.run(Test3_1.java:51)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,201252,101,18,83,0,0,44,1027,64059,8359,123874,3933

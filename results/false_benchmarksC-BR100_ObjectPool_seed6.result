@@ -1,0 +1,16 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final com.iluwatar.object.pool.ObjectPool var0 = new com.iluwatar.object.pool.ObjectPool();
+
+Concurrent suffixes:
+
+final java.lang.Object var1 = var0.checkOut();
+
+vs.
+
+final java.lang.String var1 = var0.toString();
+
+new or absent behaviour[[, return-value<>Pool available=1 inUse=1, object-receiver-suffix1<>Pool available=0 inUse=1, object-receiver-suffix2<>Pool available=0 inUse=1, return-value<>], [, return-value<>Pool available=1 inUse=0, object-receiver-suffix1<>Pool available=0 inUse=1, object-receiver-suffix2<>Pool available=0 inUse=1, return-value<>]]
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,28264,6,6,0,0,0,10,439,486,68,27271,0

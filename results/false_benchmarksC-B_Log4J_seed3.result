@@ -1,0 +1,51 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.Appender var1 = var0.getAppender((java.lang.String) "s");
+final org.apache.log4j.Appender var2 = var0.getAppender((java.lang.String) "");
+final org.apache.log4j.Appender var3 = var0.getAppender((java.lang.String) "K");
+final org.apache.log4j.ConsoleAppender var4 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var5 = var4.getLayout();
+final org.apache.log4j.ConsoleAppender var6 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var5);
+final org.apache.log4j.Layout var7 = var6.getLayout();
+final org.apache.log4j.ConsoleAppender var8 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var7, (java.lang.String) "2");
+final org.apache.log4j.Layout var9 = var8.getLayout();
+final org.apache.log4j.ConsoleAppender var10 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var9, (java.lang.String) "");
+final org.apache.log4j.Layout var11 = var10.getLayout();
+final org.apache.log4j.ConsoleAppender var12 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var11, (java.lang.String) "");
+final org.apache.log4j.Layout var13 = var12.getLayout();
+final org.apache.log4j.ConsoleAppender var14 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var13);
+final org.apache.log4j.Layout var15 = var14.getLayout();
+final org.apache.log4j.ConsoleAppender var16 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var15, (java.lang.String) "n(");
+var0.addAppender((org.apache.log4j.Appender) var16);
+final org.apache.log4j.ConsoleAppender var17 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var9, (java.lang.String) "");
+var0.removeAppender((org.apache.log4j.Appender) var17);
+var0.addAppender((org.apache.log4j.Appender) var2);
+final org.apache.log4j.ConsoleAppender var18 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var11, (java.lang.String) "");
+var0.removeAppender((org.apache.log4j.Appender) var18);
+final org.apache.log4j.ConsoleAppender var19 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var20 = var19.getLayout();
+final org.apache.log4j.ConsoleAppender var21 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var20, (java.lang.String) ";");
+final boolean var22 = var0.isAttached((org.apache.log4j.Appender) var21);
+var0.removeAllAppenders();
+final int var23 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+final org.apache.log4j.ConsoleAppender var24 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var24);
+
+Concurrent suffixes:
+
+var0.removeAllAppenders();
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test3_1$2.run(Test3_1.java:80)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.removeAllAppenders(AppenderAttachableImpl.java:134)
+	at Test3_1$2.run(Test3_1.java:70)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,3979,1,1,0,0,0,8,576,1022,167,2214,0

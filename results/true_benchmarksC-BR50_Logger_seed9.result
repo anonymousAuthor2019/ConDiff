@@ -1,0 +1,39 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getLogger((java.lang.String) "");
+final java.util.logging.Handler[] var1 = var0.getHandlers();
+final java.util.logging.Level var2 = java.util.logging.Level.FINER;
+final java.util.logging.LogRecord var3 = new java.util.logging.LogRecord((java.util.logging.Level) var2, (java.lang.String) "[Nf@_");
+final java.lang.String var4 = var3.getMessage();
+var0.log((java.util.logging.Level) var2, (java.lang.String) "", (java.lang.Object) var4);
+var0.info((java.lang.String) var4);
+var0.setUseParentHandlers((boolean) true);
+final java.lang.Object[] var5 = var3.getParameters();
+var0.entering((java.lang.String) "9O", (java.lang.String) "", (java.lang.Object[]) var5);
+var0.finer((java.lang.String) var4);
+final java.util.logging.Level var6 = var3.getLevel();
+var0.log((java.util.logging.Level) var6, (java.lang.String) var4);
+final bug4779253.MyFilter var7 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var7);
+
+Concurrent suffixes:
+
+var0.setFilter((java.util.logging.Filter) null);
+
+vs.
+
+var0.severe((java.lang.String) null);
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test9_1$2.run(Test9_1.java:64)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:314)
+	at java141.util.logging.LogManager$RootLogger.log(LogManager.java:820)
+	at java141.util.logging.Logger.doLog(Logger.java:351)
+	at java141.util.logging.Logger.log(Logger.java:374)
+	at java141.util.logging.Logger.severe(Logger.java:873)
+	at Test9_1$2.run(Test9_1.java:54)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,2554210,284,8,276,3,0,584,1071,2497700,11375,39595,4469

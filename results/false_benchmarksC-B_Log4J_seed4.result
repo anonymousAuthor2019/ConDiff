@@ -1,0 +1,30 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.Appender var1 = var0.getAppender((java.lang.String) "");
+final org.apache.log4j.ConsoleAppender var2 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var3 = var2.getLayout();
+final org.apache.log4j.ConsoleAppender var4 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var3);
+final org.apache.log4j.Layout var5 = var4.getLayout();
+final org.apache.log4j.ConsoleAppender var6 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var5);
+var0.removeAppender((org.apache.log4j.Appender) var6);
+final org.apache.log4j.ConsoleAppender var7 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var5, (java.lang.String) "T");
+var0.addAppender((org.apache.log4j.Appender) var7);
+
+Concurrent suffixes:
+
+final java.util.Enumeration var8 = var0.getAllAppenders();
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'elements()Ljava/util/Enumeration;' on null object
+	at Test4_1$1.run(Test4_1.java:40)
+Caused by: java.lang.NullPointerException: Calling 'elements()Ljava/util/Enumeration;' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.getAllAppenders(AppenderAttachableImpl.java:81)
+	at Test4_1$1.run(Test4_1.java:29)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,6604,1,1,0,0,0,8,506,1882,159,4057,0

@@ -1,0 +1,59 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var2 = var1.getLayout();
+final org.apache.log4j.ConsoleAppender var3 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var2);
+final org.apache.log4j.Layout var4 = var3.getLayout();
+final org.apache.log4j.ConsoleAppender var5 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var4, (java.lang.String) "U");
+final org.apache.log4j.Layout var6 = var5.getLayout();
+final org.apache.log4j.ConsoleAppender var7 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var6, (java.lang.String) ": ");
+final org.apache.log4j.Layout var8 = var7.getLayout();
+final org.apache.log4j.ConsoleAppender var9 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var8, (java.lang.String) "");
+final org.apache.log4j.Layout var10 = var9.getLayout();
+final org.apache.log4j.ConsoleAppender var11 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var10);
+final org.apache.log4j.Layout var12 = var11.getLayout();
+final org.apache.log4j.ConsoleAppender var13 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var12, (java.lang.String) "s");
+final org.apache.log4j.Layout var14 = var13.getLayout();
+final org.apache.log4j.ConsoleAppender var15 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var14, (java.lang.String) "");
+final org.apache.log4j.Layout var16 = var15.getLayout();
+final org.apache.log4j.ConsoleAppender var17 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var16, (java.lang.String) "");
+final org.apache.log4j.Layout var18 = var17.getLayout();
+final org.apache.log4j.ConsoleAppender var19 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var18);
+final org.apache.log4j.Layout var20 = var19.getLayout();
+final org.apache.log4j.ConsoleAppender var21 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var20);
+final org.apache.log4j.Layout var22 = var21.getLayout();
+final org.apache.log4j.ConsoleAppender var23 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var22);
+final org.apache.log4j.Layout var24 = var23.getLayout();
+final org.apache.log4j.ConsoleAppender var25 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var24);
+var0.addAppender((org.apache.log4j.Appender) var25);
+final org.apache.log4j.ConsoleAppender var26 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var26);
+final org.apache.log4j.Appender var27 = var0.getAppender((java.lang.String) "");
+final org.apache.log4j.Appender var28 = var0.getAppender((java.lang.String) "");
+var0.addAppender((org.apache.log4j.Appender) var1);
+final org.apache.log4j.ConsoleAppender var29 = new org.apache.log4j.ConsoleAppender();
+var0.removeAppender((org.apache.log4j.Appender) var29);
+final org.apache.log4j.Layout var30 = var25.getLayout();
+final org.apache.log4j.ConsoleAppender var31 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var30);
+var0.addAppender((org.apache.log4j.Appender) var31);
+final org.apache.log4j.ConsoleAppender var32 = new org.apache.log4j.ConsoleAppender();
+var0.removeAppender((org.apache.log4j.Appender) var32);
+
+Concurrent suffixes:
+
+var0.removeAllAppenders();
+
+vs.
+
+var0.removeAppender((java.lang.String) "k-");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test2_1$2.run(Test2_1.java:88)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.removeAppender(AppenderAttachableImpl.java:172)
+	at Test2_1$2.run(Test2_1.java:78)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,8213,59,1,58,0,0,36,563,2488,1612,3024,526

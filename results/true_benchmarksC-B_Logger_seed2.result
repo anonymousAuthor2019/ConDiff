@@ -1,0 +1,51 @@
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getAnonymousLogger();
+var0.setUseParentHandlers((boolean) false);
+final bug4779253.MyFilter var1 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var1);
+final java.util.ResourceBundle var2 = var0.getResourceBundle();
+var0.exiting((java.lang.String) "K^57", (java.lang.String) "7:", (java.lang.Object) var2);
+final java.util.logging.Level var3 = java.util.logging.Level.ALL;
+final java.util.logging.LogRecord var4 = new java.util.logging.LogRecord((java.util.logging.Level) var3, (java.lang.String) "");
+final java.lang.Object[] var5 = var4.getParameters();
+var0.entering((java.lang.String) "", (java.lang.String) "zN%h", (java.lang.Object[]) var5);
+final java141.util.logging.Logger var6 = java141.util.logging.Logger.getAnonymousLogger();
+final java.lang.Throwable var7 = var4.getThrown();
+var0.throwing((java.lang.String) "", (java.lang.String) "", (java.lang.Throwable) var7);
+var0.entering((java.lang.String) "", (java.lang.String) "", (java.lang.Object) var1);
+
+Concurrent suffixes:
+
+var0.info((java.lang.String) "");
+
+vs.
+
+var0.setFilter((java.util.logging.Filter) null);
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test2_1$1.run(Test2_1.java:42)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:321)
+	at java141.util.logging.Logger.doLog(Logger.java:358)
+	at java141.util.logging.Logger.log(Logger.java:380)
+	at java141.util.logging.Logger.info(Logger.java:892)
+	at Test2_1$1.run(Test2_1.java:33)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,59658,18,3,15,0,21,44,938,7706,883,49896,235

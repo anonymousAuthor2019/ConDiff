@@ -1,0 +1,21 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final com.google.common.collect.AsMap var0 = new com.google.common.collect.AsMap();
+
+Concurrent suffixes:
+
+final boolean var1 = var0.containsValue((java.lang.Object) null);
+
+vs.
+
+final java.util.Set var1 = var0.entrySet();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'iterator()Ljava/util/Iterator;' on null object
+	at Test6_1$1.run(Test6_1.java:31)
+Caused by: java.lang.NullPointerException: Calling 'iterator()Ljava/util/Iterator;' on null object
+	at java.util.AbstractMap.containsValue(AbstractMap.java:112)
+	at Test6_1$1.run(Test6_1.java:20)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,16856,5,5,0,0,1,161,823,3969,50,12014,0

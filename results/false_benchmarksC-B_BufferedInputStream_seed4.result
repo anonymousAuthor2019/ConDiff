@@ -1,0 +1,27 @@
+Cannot instantiate java11.io.BufferedInputStream. Is there a public constructor or method to create it?
+Cannot instantiate java11.io.BufferedInputStream. Is there a public constructor or method to create it?
+Cannot instantiate java11.io.BufferedInputStream. Is there a public constructor or method to create it?
+Cannot instantiate java11.io.BufferedInputStream. Is there a public constructor or method to create it?
+Cannot instantiate java11.io.BufferedInputStream. Is there a public constructor or method to create it?
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java11.io.StringBufferInputStream var0 = new java11.io.StringBufferInputStream((java.lang.String) "");
+final java11.io.BufferedInputStream var1 = new java11.io.BufferedInputStream((java11.io.InputStream) var0);
+
+Concurrent suffixes:
+
+var1.close();
+
+vs.
+
+var1.close();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'close()V' on null object
+	at Test4_1$2.run(Test4_1.java:51)
+Caused by: java.lang.NullPointerException: Calling 'close()V' on null object
+	at java11.io.BufferedInputStream.close(BufferedInputStream.java:399)
+	at Test4_1$2.run(Test4_1.java:41)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,31470,11,11,0,0,0,10,693,27553,107,3117,0

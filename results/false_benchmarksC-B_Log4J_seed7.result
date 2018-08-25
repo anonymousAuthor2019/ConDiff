@@ -1,0 +1,35 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.helpers.AppenderAttachableImpl var1 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.Appender var2 = var1.getAppender((java.lang.String) "=");
+var0.removeAppender((org.apache.log4j.Appender) var2);
+final int var3 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+final java.util.Enumeration var4 = var0.getAllAppenders();
+var0.removeAppender((java.lang.String) "l");
+final boolean var5 = var0.isAttached((org.apache.log4j.Appender) var2);
+final java.util.Enumeration var6 = var0.getAllAppenders();
+final org.apache.log4j.Appender var7 = var0.getAppender((java.lang.String) ":|-");
+final int var8 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+var0.removeAppender((org.apache.log4j.Appender) var7);
+final org.apache.log4j.ConsoleAppender var9 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var9);
+
+Concurrent suffixes:
+
+final org.apache.log4j.Appender var10 = var0.getAppender((java.lang.String) ",e");
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.ArrayIndexOutOfBoundsException: 0 >= 0
+	at Test7_1$1.run(Test7_1.java:44)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0 >= 0
+	at java.util.Vector.elementAt(Vector.java:477)
+	at org.apache.log4j.helpers.AppenderAttachableImpl.getAppender(AppenderAttachableImpl.java:99)
+	at Test7_1$1.run(Test7_1.java:33)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,10055,2,2,0,0,0,8,556,3192,216,6091,0

@@ -1,0 +1,40 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getLogger((java.lang.String) "(");
+final bug4779253.MyFilter var1 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var1);
+final java.util.logging.Level var2 = java.util.logging.Level.FINEST;
+final java.util.logging.LogRecord var3 = new java.util.logging.LogRecord((java.util.logging.Level) var2, (java.lang.String) "qY");
+final java.lang.Throwable var4 = var3.getThrown();
+var0.throwing((java.lang.String) "", (java.lang.String) "", (java.lang.Throwable) var4);
+var0.fine((java.lang.String) "");
+var0.entering((java.lang.String) "]h", (java.lang.String) "");
+final java.util.logging.Level var5 = java.util.logging.Level.ALL;
+var0.logrb((java.util.logging.Level) var2, (java.lang.String) "", (java.lang.String) "B@Qci7a-n", (java.lang.String) "", (java.lang.String) "", (java.lang.Object) var5);
+var0.warning((java.lang.String) "G");
+final bug4779253.MyFilter var6 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var6);
+final java.util.logging.Filter var7 = var0.getFilter();
+var0.exiting((java.lang.String) "", (java.lang.String) "");
+var0.setUseParentHandlers((boolean) true);
+
+Concurrent suffixes:
+
+var0.setFilter((java.util.logging.Filter) null);
+
+vs.
+
+var0.warning((java.lang.String) "+");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test3_1$2.run(Test3_1.java:66)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:314)
+	at java141.util.logging.Logger.doLog(Logger.java:351)
+	at java141.util.logging.Logger.log(Logger.java:374)
+	at java141.util.logging.Logger.warning(Logger.java:888)
+	at Test3_1$2.run(Test3_1.java:56)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,1255796,287,8,279,0,0,584,1097,1099079,11329,135726,8565

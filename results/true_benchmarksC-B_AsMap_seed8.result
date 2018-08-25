@@ -1,0 +1,16 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final com.google.common.collect.AsMap var0 = new com.google.common.collect.AsMap();
+
+Concurrent suffixes:
+
+final java.util.Set var1 = var0.entrySet();
+
+vs.
+
+final java.util.Set var1 = var0.entrySet();
+
+new or absent behaviour[[, return-value<>[], object-receiver-suffix2<>{}, object-receiver-suffix1<>{}, return-value<>null]]
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,7310,2,1,1,0,0,26,840,545,61,5843,21

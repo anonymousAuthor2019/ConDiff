@@ -1,0 +1,24 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java11.io.StringBufferInputStream var0 = new java11.io.StringBufferInputStream((java.lang.String) "jEe,");
+final java11.io.BufferedInputStream var1 = new java11.io.BufferedInputStream((java11.io.InputStream) var0);
+final java11.io.BufferedInputStream var2 = new java11.io.BufferedInputStream((java11.io.InputStream) var1);
+final java11.io.BufferedInputStream var3 = new java11.io.BufferedInputStream((java11.io.InputStream) var2, (int) 1);
+
+Concurrent suffixes:
+
+var3.close();
+
+vs.
+
+var3.close();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'close()V' on null object
+	at Test3_1$2.run(Test3_1.java:53)
+Caused by: java.lang.NullPointerException: Calling 'close()V' on null object
+	at java11.io.BufferedInputStream.close(BufferedInputStream.java:409)
+	at Test3_1$2.run(Test3_1.java:43)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,136803,16,16,0,0,0,34,663,132995,261,2884,0

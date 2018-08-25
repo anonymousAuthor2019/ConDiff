@@ -1,0 +1,37 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+var0.removeAppender((java.lang.String) "<c");
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var2 = var1.getLayout();
+final org.apache.log4j.ConsoleAppender var3 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var2);
+final org.apache.log4j.Layout var4 = var3.getLayout();
+final org.apache.log4j.ConsoleAppender var5 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var4);
+final org.apache.log4j.Layout var6 = var5.getLayout();
+final org.apache.log4j.ConsoleAppender var7 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var6);
+final org.apache.log4j.Layout var8 = var7.getLayout();
+final org.apache.log4j.ConsoleAppender var9 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var8);
+final org.apache.log4j.Layout var10 = var9.getLayout();
+final org.apache.log4j.ConsoleAppender var11 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var10);
+var0.addAppender((org.apache.log4j.Appender) var11);
+final java.util.Enumeration var12 = var0.getAllAppenders();
+final org.apache.log4j.ConsoleAppender var13 = new org.apache.log4j.ConsoleAppender();
+var0.removeAppender((org.apache.log4j.Appender) var13);
+
+Concurrent suffixes:
+
+var0.removeAllAppenders();
+
+vs.
+
+var0.removeAppender((java.lang.String) "");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test7_1$2.run(Test7_1.java:66)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.removeAppender(AppenderAttachableImpl.java:165)
+	at Test7_1$2.run(Test7_1.java:56)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,182931,90,90,0,0,0,26,570,3510,2022,176829,0

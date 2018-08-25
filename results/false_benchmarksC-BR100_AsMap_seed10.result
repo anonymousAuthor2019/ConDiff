@@ -1,0 +1,21 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final com.google.common.collect.AsMap var0 = new com.google.common.collect.AsMap();
+
+Concurrent suffixes:
+
+final boolean var1 = var0.isEmpty();
+
+vs.
+
+final int var1 = var0.size();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test10_1$2.run(Test10_1.java:54)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at java.util.AbstractMap.size(AbstractMap.java:85)
+	at Test10_1$2.run(Test10_1.java:42)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,7380,3,3,0,0,1,351,795,865,47,5673,0

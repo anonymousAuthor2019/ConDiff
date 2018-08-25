@@ -1,0 +1,26 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var1);
+final org.apache.log4j.Layout var2 = var1.getLayout();
+final org.apache.log4j.ConsoleAppender var3 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var2);
+final boolean var4 = var0.isAttached((org.apache.log4j.Appender) var3);
+
+Concurrent suffixes:
+
+final java.util.Enumeration var5 = var0.getAllAppenders();
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'elements()Ljava/util/Enumeration;' on null object
+	at Test4_1$1.run(Test4_1.java:36)
+Caused by: java.lang.NullPointerException: Calling 'elements()Ljava/util/Enumeration;' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.getAllAppenders(AppenderAttachableImpl.java:82)
+	at Test4_1$1.run(Test4_1.java:25)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,6398,44,1,43,0,0,26,522,1373,519,3734,250

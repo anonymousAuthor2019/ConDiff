@@ -1,0 +1,27 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final java.util.Enumeration var1 = var0.getAllAppenders();
+final org.apache.log4j.ConsoleAppender var2 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var2);
+final org.apache.log4j.Layout var3 = var2.getLayout();
+final org.apache.log4j.ConsoleAppender var4 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var3);
+var0.removeAppender((org.apache.log4j.Appender) var4);
+
+Concurrent suffixes:
+
+var0.removeAllAppenders();
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test8_1$2.run(Test8_1.java:56)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.removeAllAppenders(AppenderAttachableImpl.java:136)
+	at Test8_1$2.run(Test8_1.java:46)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,227116,129,129,0,0,0,26,599,8157,3619,214741,0

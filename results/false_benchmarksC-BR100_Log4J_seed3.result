@@ -1,0 +1,34 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.Appender var1 = var0.getAppender((java.lang.String) "Y");
+final org.apache.log4j.ConsoleAppender var2 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var2);
+final org.apache.log4j.Layout var3 = var2.getLayout();
+final org.apache.log4j.ConsoleAppender var4 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var3, (java.lang.String) "r");
+final org.apache.log4j.Layout var5 = var4.getLayout();
+final org.apache.log4j.ConsoleAppender var6 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var5, (java.lang.String) "");
+final boolean var7 = var0.isAttached((org.apache.log4j.Appender) var6);
+var0.removeAppender((org.apache.log4j.Appender) var2);
+final org.apache.log4j.Appender var8 = var0.getAppender((java.lang.String) "@q");
+var0.addAppender((org.apache.log4j.Appender) var8);
+var0.addAppender((org.apache.log4j.Appender) var8);
+final org.apache.log4j.Appender var9 = var0.getAppender((java.lang.String) "");
+
+Concurrent suffixes:
+
+final int var10 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test3_1$1.run(Test3_1.java:44)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.appendLoopOnAppenders(AppenderAttachableImpl.java:62)
+	at Test3_1$1.run(Test3_1.java:33)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,315314,184,184,0,0,0,36,509,17457,9418,287930,0

@@ -1,0 +1,33 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+var0.removeAppender((org.apache.log4j.Appender) var1);
+var0.removeAppender((java.lang.String) "");
+var0.removeAppender((java.lang.String) "");
+final org.apache.log4j.ConsoleAppender var2 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var3 = var2.getLayout();
+final org.apache.log4j.ConsoleAppender var4 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var3);
+var0.removeAppender((org.apache.log4j.Appender) var4);
+final int var5 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+var0.addAppender((org.apache.log4j.Appender) var2);
+var0.removeAppender((org.apache.log4j.Appender) var2);
+final int var6 = var0.appendLoopOnAppenders((org.apache.log4j.spi.LoggingEvent) null);
+
+Concurrent suffixes:
+
+final org.apache.log4j.Appender var7 = var0.getAppender((java.lang.String) "");
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test7_1$1.run(Test7_1.java:43)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.getAppender(AppenderAttachableImpl.java:100)
+	at Test7_1$1.run(Test7_1.java:32)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,78743,51,51,0,0,0,36,551,1561,484,76147,0

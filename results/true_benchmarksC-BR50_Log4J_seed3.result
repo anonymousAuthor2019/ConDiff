@@ -1,0 +1,38 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var2 = var1.getLayout();
+final org.apache.log4j.ConsoleAppender var3 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var2, (java.lang.String) "");
+var0.removeAppender((org.apache.log4j.Appender) var3);
+final org.apache.log4j.Layout var4 = var1.getLayout();
+final org.apache.log4j.ConsoleAppender var5 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var4, (java.lang.String) "");
+var0.addAppender((org.apache.log4j.Appender) var5);
+var0.removeAppender((org.apache.log4j.Appender) var5);
+final org.apache.log4j.ConsoleAppender var6 = new org.apache.log4j.ConsoleAppender();
+var0.removeAppender((org.apache.log4j.Appender) var6);
+final boolean var7 = var0.isAttached((org.apache.log4j.Appender) var3);
+final java.util.Enumeration var8 = var0.getAllAppenders();
+final org.apache.log4j.ConsoleAppender var9 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var9);
+var0.removeAppender((java.lang.String) "");
+var0.removeAppender((java.lang.String) "");
+
+Concurrent suffixes:
+
+final org.apache.log4j.Appender var10 = var0.getAppender((java.lang.String) "Q=");
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.ArrayIndexOutOfBoundsException: 0 >= 0
+	at Test3_1$1.run(Test3_1.java:47)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0 >= 0
+	at java.util.Vector.elementAt(Vector.java:477)
+	at org.apache.log4j.helpers.AppenderAttachableImpl.getAppender(AppenderAttachableImpl.java:101)
+	at Test3_1$1.run(Test3_1.java:36)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,8889,29,2,27,0,0,26,500,1311,337,6553,188

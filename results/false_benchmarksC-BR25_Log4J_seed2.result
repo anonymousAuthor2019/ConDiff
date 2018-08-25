@@ -1,0 +1,36 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final java.util.Enumeration var1 = var0.getAllAppenders();
+final org.apache.log4j.ConsoleAppender var2 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var3 = var2.getLayout();
+final org.apache.log4j.ConsoleAppender var4 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var3, (java.lang.String) ";Y");
+final org.apache.log4j.Layout var5 = var4.getLayout();
+final org.apache.log4j.ConsoleAppender var6 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var5);
+final org.apache.log4j.Layout var7 = var6.getLayout();
+final org.apache.log4j.ConsoleAppender var8 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var7);
+var0.removeAppender((org.apache.log4j.Appender) var8);
+final org.apache.log4j.ConsoleAppender var9 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var7, (java.lang.String) "");
+var0.addAppender((org.apache.log4j.Appender) var9);
+final org.apache.log4j.ConsoleAppender var10 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var11 = var10.getLayout();
+final org.apache.log4j.ConsoleAppender var12 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var11, (java.lang.String) "");
+final boolean var13 = var0.isAttached((org.apache.log4j.Appender) var12);
+
+Concurrent suffixes:
+
+var0.removeAllAppenders();
+
+vs.
+
+var0.removeAppender((java.lang.String) "Fa");
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'size()I' on null object
+	at Test2_1$2.run(Test2_1.java:65)
+Caused by: java.lang.NullPointerException: Calling 'size()I' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.removeAppender(AppenderAttachableImpl.java:164)
+	at Test2_1$2.run(Test2_1.java:55)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,82078,45,45,0,0,0,15,503,9900,1757,69918,0

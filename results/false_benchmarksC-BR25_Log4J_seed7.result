@@ -1,0 +1,43 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final java.util.Enumeration var1 = var0.getAllAppenders();
+final org.apache.log4j.ConsoleAppender var2 = new org.apache.log4j.ConsoleAppender();
+final org.apache.log4j.Layout var3 = var2.getLayout();
+final org.apache.log4j.ConsoleAppender var4 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var3);
+final org.apache.log4j.Layout var5 = var4.getLayout();
+final org.apache.log4j.ConsoleAppender var6 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var5);
+final org.apache.log4j.Layout var7 = var6.getLayout();
+final org.apache.log4j.ConsoleAppender var8 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var7);
+final org.apache.log4j.Layout var9 = var8.getLayout();
+final org.apache.log4j.ConsoleAppender var10 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var9, (java.lang.String) "z");
+final org.apache.log4j.Layout var11 = var10.getLayout();
+final org.apache.log4j.ConsoleAppender var12 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var11, (java.lang.String) "{F");
+var0.addAppender((org.apache.log4j.Appender) var12);
+final org.apache.log4j.Appender var13 = var0.getAppender((java.lang.String) "");
+var0.removeAppender((java.lang.String) "");
+var0.removeAppender((java.lang.String) "}");
+final org.apache.log4j.ConsoleAppender var14 = new org.apache.log4j.ConsoleAppender((org.apache.log4j.Layout) var7);
+var0.removeAppender((org.apache.log4j.Appender) var14);
+final org.apache.log4j.Appender var15 = var0.getAppender((java.lang.String) "w=");
+final boolean var16 = var0.isAttached((org.apache.log4j.Appender) var2);
+final org.apache.log4j.Appender var17 = var0.getAppender((java.lang.String) "9");
+
+Concurrent suffixes:
+
+final org.apache.log4j.Appender var18 = var0.getAppender((java.lang.String) "");
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.ArrayIndexOutOfBoundsException: 0 >= 0
+	at Test7_1$1.run(Test7_1.java:52)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0 >= 0
+	at java.util.Vector.elementAt(Vector.java:477)
+	at org.apache.log4j.helpers.AppenderAttachableImpl.getAppender(AppenderAttachableImpl.java:100)
+	at Test7_1$1.run(Test7_1.java:41)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,32882,17,17,0,0,0,15,553,1444,550,30335,0

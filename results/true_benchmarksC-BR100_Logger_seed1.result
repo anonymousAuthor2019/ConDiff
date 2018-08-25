@@ -1,0 +1,60 @@
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+Cannot instantiate java141.util.logging.Logger. Is there a public constructor or method to create it?
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final java141.util.logging.Logger var0 = java141.util.logging.Logger.getLogger((java.lang.String) "");
+final java141.util.logging.Logger var1 = java141.util.logging.Logger.getAnonymousLogger();
+var0.fine((java.lang.String) "A<(Q");
+var0.finest((java.lang.String) "");
+var0.info((java.lang.String) ".");
+final java.util.logging.Level var2 = java.util.logging.Level.OFF;
+final java.util.logging.Level var3 = java.util.logging.Level.INFO;
+final java.util.logging.LogRecord var4 = new java.util.logging.LogRecord((java.util.logging.Level) var3, (java.lang.String) "b");
+final java.util.logging.Level var5 = var4.getLevel();
+final java.util.logging.LogRecord var6 = new java.util.logging.LogRecord((java.util.logging.Level) var5, (java.lang.String) "I");
+final java.lang.Object[] var7 = var6.getParameters();
+var0.log((java.util.logging.Level) var2, (java.lang.String) "", (java.lang.Object[]) var7);
+final bug4779253.MyFilter var8 = new bug4779253.MyFilter();
+var0.setFilter((java.util.logging.Filter) var8);
+final java.util.logging.Level var9 = var0.getLevel();
+final java141.util.logging.Logger var10 = java141.util.logging.Logger.getLogger((java.lang.String) "");
+final java.util.logging.Level var11 = var0.getLevel();
+
+Concurrent suffixes:
+
+var0.info((java.lang.String) "D");
+
+vs.
+
+var0.setFilter((java.util.logging.Filter) null);
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at Test1_1$1.run(Test1_1.java:45)
+Caused by: java.lang.NullPointerException: Calling 'isLoggable(Ljava/util/logging/LogRecord;)Z' on null object
+	at java141.util.logging.Logger.log(Logger.java:318)
+	at java141.util.logging.LogManager$RootLogger.log(LogManager.java:820)
+	at java141.util.logging.Logger.doLog(Logger.java:355)
+	at java141.util.logging.Logger.log(Logger.java:378)
+	at java141.util.logging.Logger.info(Logger.java:915)
+	at Test1_1$1.run(Test1_1.java:36)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,2193333,1123,11,1112,1,0,990,1088,1903690,93974,118804,75777

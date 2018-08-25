@@ -1,0 +1,21 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final com.google.common.collect.AsMap var0 = new com.google.common.collect.AsMap();
+
+Concurrent suffixes:
+
+var0.clear();
+
+vs.
+
+final java.util.Set var1 = var0.entrySet();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'clear()V' on null object
+	at Test2_1$1.run(Test2_1.java:29)
+Caused by: java.lang.NullPointerException: Calling 'clear()V' on null object
+	at java.util.AbstractMap.clear(AbstractMap.java:297)
+	at Test2_1$1.run(Test2_1.java:20)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,14993,6,6,0,0,0,161,850,1756,57,12330,0

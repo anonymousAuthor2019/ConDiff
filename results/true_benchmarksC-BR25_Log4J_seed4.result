@@ -1,0 +1,30 @@
+
+==== Found a behavioral difference! ====
+Sequential prefix:
+final org.apache.log4j.helpers.AppenderAttachableImpl var0 = new org.apache.log4j.helpers.AppenderAttachableImpl();
+final org.apache.log4j.ConsoleAppender var1 = new org.apache.log4j.ConsoleAppender();
+var0.addAppender((org.apache.log4j.Appender) var1);
+final java.util.Enumeration var2 = var0.getAllAppenders();
+var0.removeAppender((java.lang.String) "");
+var0.addAppender((org.apache.log4j.Appender) var1);
+final org.apache.log4j.Appender var3 = var0.getAppender((java.lang.String) "");
+var0.removeAppender((org.apache.log4j.Appender) var1);
+final org.apache.log4j.Appender var4 = var0.getAppender((java.lang.String) "Mi");
+final org.apache.log4j.Appender var5 = var0.getAppender((java.lang.String) "x");
+
+Concurrent suffixes:
+
+final java.util.Enumeration var6 = var0.getAllAppenders();
+
+vs.
+
+var0.removeAllAppenders();
+
+stack traceSet(java.lang.RuntimeException: java.lang.NullPointerException: Calling 'elements()Ljava/util/Enumeration;' on null object
+	at Test4_1$1.run(Test4_1.java:40)
+Caused by: java.lang.NullPointerException: Calling 'elements()Ljava/util/Enumeration;' on null object
+	at org.apache.log4j.helpers.AppenderAttachableImpl.getAllAppenders(AppenderAttachableImpl.java:82)
+	at Test4_1$1.run(Test4_1.java:29)
+)
+HEADER,SR,DRT,CT,CTB,CTPRUNED,PREFIXPRUNED,SUFFIXPRUNED,CFP,TIME_SCHANGE,TIME_GEN,TIME_DIFFSEQ,TIME_DIFFCON,TIME_CIA
+RESULTCSV,true,9969,30,1,29,0,0,15,483,4655,1291,3134,406
